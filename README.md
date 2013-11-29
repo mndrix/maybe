@@ -8,12 +8,12 @@
 
     ?- staff(Name, MaybeSpouse),
        maybe_default_value(MaybeSpouse, '(none)', Spouse).
-       Name = tom,
-       Spouse = teresa ;
-       Name = bob,
-       Spouse = '(none)' ;
-       Name = sue,
-       Spouse = william.
+     Name = tom,
+     Spouse = teresa ;
+     Name = bob,
+     Spouse = '(none)' ;
+     Name = sue,
+     Spouse = william.
 
 # Description
 
