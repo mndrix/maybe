@@ -1,5 +1,5 @@
 name(maybe).
-title('').
+title('The maybe type represents an optional value').
 
 version('0.0.1').
 download('http://packs.ndrix.com/maybe/maybe-0.0.1.tgz').
