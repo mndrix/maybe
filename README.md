@@ -21,7 +21,7 @@ The `maybe` type encapsulates an optional value.  When a value is present, we ha
 
 This module draws inspiration from similar libraries for [Mercury](http://www.mercurylang.org/information/doc-release/mercury_library/maybe.html#maybe) and [Haskell](http://hackage.haskell.org/package/base/docs/Data-Maybe.html).  We make predicates available even where it's clearer to use unification.  That facilitates using maybe values with `maplist` and friends.
 
-In addition to the predicates described below, this module also defines clauses for the multifile predicate `error:has_type/2` which describe the type `maybe` and `maybe(T)` where `T` is a type parameter.
+In addition to the predicates described below, this module defines clauses for the multifile predicate `error:has_type/2` which describe the type `maybe` and `maybe(T)` where `T` is a type parameter.  It also defines clauses for working with library(quickcheck).
 
 # Changes in this Version
 

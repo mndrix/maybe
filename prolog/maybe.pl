@@ -22,6 +22,23 @@ error:has_type(maybe(T), Maybe) :-
     ; true
     ).
 
+% we don't load library(quickcheck) to avoid a dependency
+:- multifile quickcheck:arbitrary/2.
+quickcheck:arbitrary(maybe, Maybe) :-
+    quickcheck:arbitrary(maybe(any), Maybe).
+quickcheck:arbitrary(maybe(T), Maybe) :-
+    random_between(0, 4, N),
+    ( N == 0 ->
+        Maybe = nothing
+    ; % otherwise ->
+        quickcheck:arbitrary(T, X),
+        Maybe = just(X)
+    ).
+
+:- multifile quickcheck:shrink/3.
+quickcheck:shrink(maybe(T), just(X0), just(X)) :-
+    quickcheck:shrink(T, X0, X).
+
 
 %% is_just(+Maybe:maybe) is semidet.
 %
