@@ -28,12 +28,9 @@ wrap_unwrap(X:atomic) :-
 list_round_trip(L0:list(atomic)) :-
     maybe_list(Maybe, L0),
     maybe_list(Maybe, L1),
-
-    % same head or both empty
-    ( L0 = [H|_], L1 = [H|_]
-    ; L0 = [],    L1 = []
-    ),
-    !.
+    xor( (L0 = [H|_], L1 = [H|_])  % same head ...
+       , (L0 = [],    L1 = []   )  % ... or both empty
+       ).
 
 
 :- use_module(library(tap)).
