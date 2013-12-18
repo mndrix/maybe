@@ -1,19 +1,24 @@
 :- use_module(library(maybe)).
 :- use_module(library(quickcheck)).
 
+xor(A,B) :-
+    ( call(A), \+ call(B)
+    ; call(B), \+ call(A)
+    ),
+    !.
+
+
 % define some properties
 
 just_or_nothing(Maybe:maybe(atomic)) :-
-    ( is_just(Maybe)
-    ; is_nothing(Maybe)
-    ),
-    !.
+    xor( is_just(Maybe)
+       , is_nothing(Maybe)
+       ).
 
 maybe_value_or_nothing(Maybe:maybe(atomic)) :-
-    ( maybe_value(Maybe, _)
-    ; is_nothing(Maybe)
-    ),
-    !.
+    xor( maybe_value(Maybe, _)
+       , is_nothing(Maybe)
+       ).
 
 list_round_trip(L0:list(atomic)) :-
     maybe_list(Maybe, L0),
