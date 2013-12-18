@@ -20,6 +20,11 @@ maybe_value_or_nothing(Maybe:maybe(atomic)) :-
        , is_nothing(Maybe)
        ).
 
+wrap_unwrap(X:atomic) :-
+    just_value(Just, X),
+    just_value(Just, Y),
+    X == Y.
+
 list_round_trip(L0:list(atomic)) :-
     maybe_list(Maybe, L0),
     maybe_list(Maybe, L1),
@@ -35,4 +40,5 @@ list_round_trip(L0:list(atomic)) :-
 
 quickcheck(just_or_nothing/1).
 quickcheck(maybe_value_or_nothing/1).
+quickcheck(wrap_unwrap/1).
 quickcheck(list_round_trip/1).

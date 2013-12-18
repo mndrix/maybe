@@ -53,12 +53,14 @@ is_nothing(nothing).
 
 
 %% just_value(+Just:maybe(T), -Value:T) is det.
+%% just_value(-Just:maybe(T), +Value:T) is det.
 %
 %  True if Just wraps Value. Throws an exception if Just is
 %  `nothing`.
+just_value(just(Value), Value) :-
+    !.
 just_value(nothing, _) :-
     domain_error(just, nothing).
-just_value(just(Value), Value).
 
 
 %% maybe_value(+Maybe:maybe(T), -Value:T) is det.
