@@ -25,7 +25,10 @@ In addition to the predicates described below, this module defines clauses for t
 
 # Changes in this Version
 
-  * Add call_maybe/3
+  * Add meta_predicate declarations for
+    * call_maybe/3
+    * map_maybe/3
+    * fold_maybe/4
 
 # Installation
 
