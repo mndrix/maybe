@@ -25,9 +25,7 @@ In addition to the predicates described below, this module defines clauses for t
 
 # Changes in this Version
 
-  * Allow just_value/2 in multiple modes
-  * Support library(quickcheck)
-  * More thorough test suite
+  * Add call_maybe/3
 
 # Installation
 
