@@ -47,6 +47,17 @@ maybe_mapping(M:maybe(integer)) :-
     maplist(Goal, L, L1),
     maybe_list(M1, L1).
 
+call_maybe_fail(X:atomic) :-
+    call_maybe(fail, X, Maybe),
+    Maybe == nothing.
+
+call_maybe_true(X:atomic) :-
+    call_maybe(true, X, Maybe),
+    just_value(Maybe, X).
+
+call_maybe_unify(X:atomic) :-
+    call_maybe(Y=X, Y, Maybe),
+    just_value(Maybe, X).
 
 
 :- use_module(library(tap)).
@@ -57,3 +68,6 @@ quickcheck(wrap_unwrap/1).
 quickcheck(list_round_trip/1).
 quickcheck(list_mapping/1).
 quickcheck(maybe_mapping/1).
+quickcheck(call_maybe_fail/1).
+quickcheck(call_maybe_true/1).
+quickcheck(call_maybe_unify/1).

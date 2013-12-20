@@ -1,4 +1,5 @@
-:- module(maybe, [ is_just/1
+:- module(maybe, [ call_maybe/3
+                 , is_just/1
                  , is_nothing/1
                  , just_value/2
                  , maybe_value/2
@@ -67,6 +68,31 @@ just_value(nothing, _) :-
 %
 %  True if Maybe is `just(Value)`; fails for `nothing`.
 maybe_value(just(Value), Value).
+
+%% call_maybe(:Goal, ?Value:T, -Maybe:maybe(T)) is multi.
+%
+%  If `call(Goal)` succeeds, `Maybe=just(Value)`, otherwise
+%  `Maybe=nothing`. Goal typically binds Value. If Goal produces
+%  multiple solutions on backtracking, so will call_maybe/3. In that
+%  case, Maybe will never be `nothing`.
+%
+%  For example,
+%
+%      ?- L = [a,b,c], call_maybe(L=[H|_], H, MaybeHead).
+%      H = a,
+%      MaybeHead = just(a).
+%
+%      ?- L = [], call_maybe(L=[H|_], H, MaybeHead).
+%      MaybeHead = nothing.
+%
+%  Of course, that particular example could have been implemented with
+%  maybe_list/2 instead.
+call_maybe(Goal, Value, Maybe) :-
+    ( call(Goal) *->
+        just_value(Maybe, Value)
+    ; % no solutions ->
+        Maybe = nothing
+    ).
 
 
 %% maybe_list(?Maybe:maybe(T), ?List:list(T)) is det.

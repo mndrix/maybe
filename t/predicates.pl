@@ -33,3 +33,17 @@ maybe_default_value(just(14), 42, 14).
 map_maybe(succ, nothing, nothing).
 map_maybe(succ, just(2), just(3)).
 map_maybe(atom_string, just(hello), just("hello")).
+
+'call_maybe/3 with multiple solutions' :-
+    findall( Maybe
+           , call_maybe( member(X,[a,b,c,d]), X, Maybe )
+           , Maybes
+           ),
+    Maybes == [just(a), just(b), just(c), just(d)].
+
+'call_maybe/3 without any solutions' :-
+    findall( Maybe
+           , call_maybe( member(X,[]), X, Maybe )
+           , Maybes
+           ),
+    Maybes == [nothing].
