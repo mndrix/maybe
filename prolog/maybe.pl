@@ -87,6 +87,7 @@ maybe_value(just(Value), Value).
 %
 %  Of course, that particular example could have been implemented with
 %  maybe_list/2 instead.
+:- meta_predicate call_maybe(0,?,-).
 call_maybe(Goal, Value, Maybe) :-
     ( call(Goal) *->
         just_value(Maybe, Value)
@@ -126,6 +127,7 @@ default_maybe_value(Default, Maybe, Value) :-
 %  True if `call(Goal, Value0, Value)` succeeds for `just` values. Goal
 %  is not called for `nothing` values, which remain unchanged. "Use the
 %  source" for a clearer explanation.
+:- meta_predicate map_maybe(2,?,?).
 map_maybe(_, nothing, nothing) :-
     !.  % help indexer
 map_maybe(Goal, just(V0), just(V)) :-
@@ -136,6 +138,7 @@ map_maybe(Goal, just(V0), just(V)) :-
 %
 %  `nothing` leaves `Accum0=Accum` while `just` relates them via Goal.
 %  "Use the source" for a clearer explanation.
+:- meta_predicate fold_maybe(3,?,?,?).
 fold_maybe(_, nothing, Accum, Accum).
 fold_maybe(Goal, just(Value), Accum0, Accum) :-
     call(Goal, Value, Accum0, Accum).
